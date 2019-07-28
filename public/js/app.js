@@ -1901,21 +1901,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       read: {},
       unread: {},
-      unreadCount: 0,
-      items: [{
-        title: 'Click Me'
-      }, {
-        title: 'Click Me'
-      }, {
-        title: 'Click Me'
-      }, {
-        title: 'Click Me 2'
-      }]
+      unreadCount: 0
     };
   },
   created: function created() {
@@ -1927,7 +1922,7 @@ __webpack_require__.r(__webpack_exports__);
     getNotifications: function getNotifications() {
       var _this = this;
 
-      axios.post('/api/notifications/').then(function (res) {
+      axios.post('/api/notifications').then(function (res) {
         _this.read = res.data.readx, _this.unread = res.data.unreadx, _this.unreadCount = res.data.unreadx.length;
       })["catch"](function (error) {
         return console.log(error.response.data);
@@ -57991,21 +57986,22 @@ var render = function() {
         [
           _c(
             "v-btn",
-            {
-              attrs: { slot: "activator", color: "primary", dark: "" },
-              slot: "activator"
-            },
-            [_vm._v("Dropdown")]
+            { attrs: { slot: "activator", icon: "" }, slot: "activator" },
+            [
+              _c("v-icon", { attrs: { color: "red" } }, [
+                _vm._v("\n            add_alert\n        ")
+              ])
+            ],
+            1
           ),
           _vm._v(" "),
           _c(
             "v-list",
-            { attrs: { "close-delay": "" } },
-            _vm._l(_vm.items, function(item, index) {
+            _vm._l(_vm.unread, function(item) {
               return _c(
                 "v-list-tile",
-                { key: index, on: { click: function($event) {} } },
-                [_c("v-list-tile-title", [_vm._v(_vm._s(item.title))])],
+                { key: item.id },
+                [_c("v-list-tile-title", [_vm._v(_vm._s(item.data.question))])],
                 1
               )
             }),

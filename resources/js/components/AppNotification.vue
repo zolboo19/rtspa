@@ -1,10 +1,14 @@
 <template>
     <div class="text-xs-center" data-app>
         <v-menu offset-y absolute>
-        <v-btn slot="activator" color="primary" dark>Dropdown</v-btn>
-        <v-list close-delay>
-            <v-list-tile v-for="(item, index) in items" :key="index" @click="">
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        <v-btn slot="activator" icon>
+            <v-icon color="red">
+                add_alert
+            </v-icon>
+        </v-btn>
+        <v-list>
+            <v-list-tile v-for="item in unread" :key="item.id">
+            <v-list-tile-title>{{ item.data.question }}</v-list-tile-title>
             </v-list-tile>
         </v-list>
         </v-menu>
@@ -18,12 +22,6 @@ export default {
             read: {},
             unread:{},
             unreadCount: 0,
-            items: [
-                    { title: 'Click Me' },
-                    { title: 'Click Me' },
-                    { title: 'Click Me' },
-                    { title: 'Click Me 2' },
-                ],
         }
     },
     created(){
@@ -33,7 +31,7 @@ export default {
     },
     methods:{
         getNotifications(){
-            axios.post('/api/notifications/')
+            axios.post('/api/notifications')
                 .then(
                     res => {
                     this.read = res.data.readx,

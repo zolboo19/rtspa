@@ -32,6 +32,7 @@ class NewReplyNotification extends Notification
     public function via($notifiable)
     {
         return ['database'];
+        //return $notifiable->prefers_sms ? ['nexmo'] : ['mail', 'database'];
     }
 
     public function toArray($notifiable)
