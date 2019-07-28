@@ -10,7 +10,9 @@
 </head>
 <body>
     <div id="app" class="">
+    <v-app> {{--  Үүнийг нэмэхгүйгээр явсан бол таны vuetify бүрэн ажиллахгүй шүү...  --}}
         <app-home></app-home>
+    </v-app>
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>

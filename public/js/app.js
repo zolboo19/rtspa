@@ -1901,18 +1901,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       read: {},
       unread: {},
-      unreadCount: 0
+      unreadCount: 0,
+      items: [{
+        title: 'Click Me'
+      }, {
+        title: 'Click Me'
+      }, {
+        title: 'Click Me'
+      }, {
+        title: 'Click Me 2'
+      }]
     };
   },
   created: function created() {
@@ -57980,54 +57983,33 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "text-center", attrs: { "data-app": "" } },
+    { staticClass: "text-xs-center", attrs: { "data-app": "" } },
     [
       _c(
         "v-menu",
-        { attrs: { "offset-y": "" } },
+        { attrs: { "offset-y": "", absolute: "" } },
         [
           _c(
             "v-btn",
-            { attrs: { slot: "activator", icon: "" }, slot: "activator" },
-            [
-              _c("v-icon", { attrs: { color: "red" } }, [_vm._v("add_alert")]),
-              _vm._v(" " + _vm._s(_vm.unreadCount) + "\n      ")
-            ],
-            1
+            {
+              attrs: { slot: "activator", color: "primary", dark: "" },
+              slot: "activator"
+            },
+            [_vm._v("Dropdown")]
           ),
           _vm._v(" "),
           _c(
             "v-list",
-            [
-              _vm._l(_vm.unread, function(item) {
-                return _c(
-                  "v-list-tile",
-                  { key: item.id },
-                  [
-                    _c("v-list-tile-title", [
-                      _vm._v(_vm._s(item.data.question))
-                    ])
-                  ],
-                  1
-                )
-              }),
-              _vm._v(" "),
-              _c("v-divider"),
-              _vm._v(" "),
-              _vm._l(_vm.read, function(item) {
-                return _c(
-                  "v-list-tile",
-                  { key: item.id },
-                  [
-                    _c("v-list-tile-title", [
-                      _vm._v(_vm._s(item.data.question))
-                    ])
-                  ],
-                  1
-                )
-              })
-            ],
-            2
+            { attrs: { "close-delay": "" } },
+            _vm._l(_vm.items, function(item, index) {
+              return _c(
+                "v-list-tile",
+                { key: index, on: { click: function($event) {} } },
+                [_c("v-list-tile-title", [_vm._v(_vm._s(item.title))])],
+                1
+              )
+            }),
+            1
           )
         ],
         1
@@ -58061,7 +58043,7 @@ var render = function() {
   return _c(
     "v-toolbar",
     [
-      _c("v-toolbar-title", [_vm._v("Real time forum app")]),
+      _c("v-toolbar-title", [_vm._v("Хэлэлцүүлэг(Real time forum app)")]),
       _vm._v(" "),
       _c("v-spacer"),
       _vm._v(" "),
@@ -58069,7 +58051,6 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "hidden-sm-and-down" },
         _vm._l(_vm.links, function(link) {
           return link.show
             ? _c(
@@ -101920,8 +101901,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\code\laravel\forumapp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\code\laravel\forumapp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\code\laravel\rtspa\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\code\laravel\rtspa\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

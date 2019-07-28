@@ -1,20 +1,14 @@
 <template>
-    <div class="text-center" data-app>
-    <v-menu offset-y>
-        <v-btn icon slot="activator">
-                <v-icon color="red">add_alert</v-icon> {{ unreadCount }}
-        </v-btn>
-        <v-list>
-            <v-list-tile v-for="item in unread" :key="item.id">
-                <v-list-tile-title>{{ item.data.question }}</v-list-tile-title>
-            </v-list-tile>
-            <v-divider></v-divider>
-            <v-list-tile v-for="item in read" :key="item.id">
-                <v-list-tile-title>{{ item.data.question }}</v-list-tile-title>
+    <div class="text-xs-center" data-app>
+        <v-menu offset-y absolute>
+        <v-btn slot="activator" color="primary" dark>Dropdown</v-btn>
+        <v-list close-delay>
+            <v-list-tile v-for="(item, index) in items" :key="index" @click="">
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
             </v-list-tile>
         </v-list>
-    </v-menu>
-  </div>
+        </v-menu>
+    </div>
 </template>
 
 <script>
@@ -23,7 +17,13 @@ export default {
         return{
             read: {},
             unread:{},
-            unreadCount: 0
+            unreadCount: 0,
+            items: [
+                    { title: 'Click Me' },
+                    { title: 'Click Me' },
+                    { title: 'Click Me' },
+                    { title: 'Click Me 2' },
+                ],
         }
     },
     created(){

@@ -1,10 +1,10 @@
 <template>
   <v-toolbar>
     <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-    <v-toolbar-title>Real time forum app</v-toolbar-title>
+    <v-toolbar-title>Хэлэлцүүлэг(Real time forum app)</v-toolbar-title>
     <v-spacer></v-spacer>
     <app-notification></app-notification>
-    <div class="hidden-sm-and-down">
+    <div>
         <router-link
             v-for="link in links"
             :key="link.title"
