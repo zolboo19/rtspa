@@ -6,6 +6,7 @@ use App\Model\Question;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Resources\QuestionResource;
+use App\Notifications\NewQuestionNotification;
 
 class QuestionController extends Controller
 {
@@ -22,7 +23,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return QuestionResource::collection(Question::all());
+        return QuestionResource::collection(Question::latest()->get());
     }
 
     /**
@@ -56,6 +57,8 @@ class QuestionController extends Controller
 
         $question = auth()->user()->question()->create($request->all());
 
+        //$user = $question->user;
+        //$user->notify(new NewQuestionNotification($question));
         //Question::create($request->all());
         return response(new QuestionResource($question), Response::HTTP_CREATED);
 

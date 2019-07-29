@@ -1917,6 +1917,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1943,9 +1944,17 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     readIt: function readIt(notification) {
+      var _this2 = this;
+
       axios.post('/api/markAsRead', {
         id: notification.id
-      });
+      }).then(function (res) {
+        _this2.unread.splice(notification, 1);
+
+        _this2.read.push(notification);
+
+        _this2.unreadCount--;
+      })["catch"]();
     }
   }
 });
@@ -1985,6 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      loggedIn: User.loggedIn(),
       links: [{
         title: 'Хэлэлцүүлэг',
         to: '/forum',
@@ -58009,7 +58019,8 @@ var render = function() {
             [
               _c("v-icon", { attrs: { color: "red" } }, [
                 _vm._v("\n            add_alert\n        ")
-              ])
+              ]),
+              _vm._v("\n        " + _vm._s(_vm.unreadCount) + "\n    ")
             ],
             1
           ),
@@ -58032,7 +58043,7 @@ var render = function() {
                   [
                     _c(
                       "router-link",
-                      { attrs: { to: item.data.path } },
+                      { attrs: { to: item.path } },
                       [
                         _c(
                           "v-list-tile-title",
@@ -58043,7 +58054,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v(_vm._s(item.data.question))]
+                          [_vm._v(_vm._s(item.question))]
                         )
                       ],
                       1
@@ -58059,11 +58070,7 @@ var render = function() {
                 return _c(
                   "v-list-tile",
                   { key: item.id },
-                  [
-                    _c("v-list-tile-title", [
-                      _vm._v(_vm._s(item.data.question))
-                    ])
-                  ],
+                  [_c("v-list-tile-title", [_vm._v(_vm._s(item.question))])],
                   1
                 )
               })
@@ -58106,7 +58113,7 @@ var render = function() {
       _vm._v(" "),
       _c("v-spacer"),
       _vm._v(" "),
-      _c("app-notification"),
+      _vm.loggedIn ? _c("app-notification") : _vm._e(),
       _vm._v(" "),
       _c(
         "div",

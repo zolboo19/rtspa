@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifications;
+use App\Http\Resources\NotificationResource;
 
 class NotificationController extends Controller
 {
@@ -17,8 +18,8 @@ class NotificationController extends Controller
         return [
             //'user' => auth()->user(),
             //'noti' => auth()->user()->notifications,
-            //'readx' => auth()->user()->readNotifications,
-            'unreadx' => auth()->user()->unreadNotifications,
+            'readx' => NotificationResource::collection(auth()->user()->readNotifications),
+            'unreadx' => NotificationResource::collection(auth()->user()->unreadNotifications),
         ];
     }
 

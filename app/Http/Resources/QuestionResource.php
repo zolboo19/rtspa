@@ -23,7 +23,7 @@ class QuestionResource extends JsonResource
             'path' => $this->path,
             'body' => $this->body,
             'created_at' => $this->created_at->diffForHumans(),
-            'user' => $this->user['name'],
+            'user' => $this->user->name, //энд бид user["name"] ингэж бичсэн нь алдаа үүсгээд notificatin-ыг ажиллуулахгүй байв.
             'user_id' => $this->user_id
         ];
     }

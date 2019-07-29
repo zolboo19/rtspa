@@ -3,7 +3,7 @@
     <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
     <v-toolbar-title>Хэлэлцүүлэг(Real time forum app)</v-toolbar-title>
     <v-spacer></v-spacer>
-    <app-notification></app-notification>
+    <app-notification v-if="loggedIn"></app-notification>
     <div>
         <router-link
             v-for="link in links"
@@ -22,6 +22,7 @@ import AppNotification from '../components/AppNotification.vue';
 export default {
     data(){
         return {
+            loggedIn: User.loggedIn(),
             links:[
                 { title: 'Хэлэлцүүлэг', to: '/forum' , show: true},
                 { title: 'Асуулт', to: '/questionCreate' , show: User.loggedIn()},

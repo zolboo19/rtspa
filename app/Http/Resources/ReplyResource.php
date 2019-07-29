@@ -18,7 +18,7 @@ class ReplyResource extends JsonResource
         return [
             'id' => $this->id,
             'reply' => $this->body,
-            'user' => $this->user->name,
+            'user' => $this->user['name'], //user->name ингэж бичихээр алдаа заана. error object
             'user_id' => $this->user_id,
             'question_slug' => $this->question->slug,
             'like_count' => $this->like->count(),
