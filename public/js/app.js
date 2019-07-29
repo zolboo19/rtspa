@@ -1905,6 +1905,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1923,9 +1935,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/notifications').then(function (res) {
-        _this.read = res.data.readx, _this.unread = res.data.unreadx, _this.unreadCount = res.data.unreadx.length;
+        _this.read = res.data.readx;
+        _this.unread = res.data.unreadx;
+        _this.unreadCount = res.data.unreadx.length;
       })["catch"](function (error) {
         return console.log(error.response.data);
+      });
+    },
+    readIt: function readIt(notification) {
+      axios.post('/api/markAsRead', {
+        id: notification.id
       });
     }
   }
@@ -57997,15 +58016,59 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-list",
-            _vm._l(_vm.unread, function(item) {
-              return _c(
+            [
+              _c(
                 "v-list-tile",
-                { key: item.id },
-                [_c("v-list-tile-title", [_vm._v(_vm._s(item.data.question))])],
+                [_c("v-list-tile-title", [_vm._v("Мэдэгдлүүд")])],
                 1
-              )
-            }),
-            1
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _vm._l(_vm.unread, function(item) {
+                return _c(
+                  "v-list-tile",
+                  { key: item.id },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: item.data.path } },
+                      [
+                        _c(
+                          "v-list-tile-title",
+                          {
+                            on: {
+                              click: function($event) {
+                                return _vm.readIt(item)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(item.data.question))]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              }),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _vm._l(_vm.read, function(item) {
+                return _c(
+                  "v-list-tile",
+                  { key: item.id },
+                  [
+                    _c("v-list-tile-title", [
+                      _vm._v(_vm._s(item.data.question))
+                    ])
+                  ],
+                  1
+                )
+              })
+            ],
+            2
           )
         ],
         1
@@ -100285,7 +100348,7 @@ function () {
     key: "admin",
     value: function admin() {
       if (this.loggedIn()) {
-        return this.id() == 31;
+        return this.id() == 21;
       }
 
       return false;

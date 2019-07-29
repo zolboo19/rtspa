@@ -44,7 +44,7 @@ class User {
 
     admin(){
         if(this.loggedIn()){
-            return this.id() == 31
+            return this.id() == 21
         }
         return false;
     }
