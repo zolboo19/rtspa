@@ -110761,10 +110761,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AppHome', __webpack_requir
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+ //import Echo from 'laravel-echo';
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
-  router: _Router_router_js__WEBPACK_IMPORTED_MODULE_5__["default"]
+  router: _Router_router_js__WEBPACK_IMPORTED_MODULE_5__["default"],
+  mounted: function mounted() {
+    //шалгаж үзэх зорилгоор оруулсан.
+    Echo.channel('likeChannel').listen('LikeEvent', function (e) {
+      console.log('ooo my god Realtime app');
+    });
+  }
 });
 
 /***/ }),
@@ -110827,10 +110834,10 @@ if (token) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "5efe12d77a365aac3056",
-  cluster: "ap1",
-  forceTLS: true //encrypted: true
-
+  key: '71c0204299050cc03529',
+  cluster: 'ap2',
+  //forceTLS: true,
+  encrypted: true
 });
 
 /***/ }),

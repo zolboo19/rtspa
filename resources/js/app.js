@@ -51,8 +51,15 @@ Vue.component('AppHome', require('./components/AppHome.vue').default);
  */
 
  import router from './Router/router.js';
+//import Echo from 'laravel-echo';
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    mounted(){ //шалгаж үзэх зорилгоор оруулсан.
+        Echo.channel('likeChannel')
+        .listen('LikeEvent', (e) => {
+            console.log('ooo my god Realtime app');
+        })
+    }
 });
