@@ -39,12 +39,12 @@ export default {
         },
         increment(){
             axios.post(`/api/like/${this.content.id}`)
-                .then(res => this.count ++)
+                .then(res => this.count++)
 
         },
         decrement(){
             axios.delete(`/api/like/${this.content.id}`)
-                .then(res => this.count --)
+                .then(res => this.count--)
         }
     }
 
