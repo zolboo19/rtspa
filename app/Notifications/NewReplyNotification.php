@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Model\Reply;
 use Illuminate\Notifications\Messages\BroadcastMessage;
+use App\Http\Resources\ReplyResource;
 
 class NewReplyNotification extends Notification
 {
@@ -51,7 +52,7 @@ class NewReplyNotification extends Notification
             'replyBy' => $this->reply->user->name,
             'question' => $this->reply->question->title,
             'path' => $this->reply->question->path,
-            'reply' => $this->reply
+            'reply' => new ReplyResource($this->reply),
         ]);
     }
 }

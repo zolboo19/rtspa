@@ -24,7 +24,6 @@ export default {
                 }
             });
     },
-
     computed:{
         color(){
             return this.liked ? 'red' : 'purple lighten-4'

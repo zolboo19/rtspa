@@ -2932,6 +2932,9 @@ __webpack_require__.r(__webpack_exports__);
           _this.contents.splice(index, 1);
         });
       });
+      Echo["private"]('App.User.' + User.id()).notification(function (notification) {
+        console.log(notification.type);
+      });
     }
   }
 });
