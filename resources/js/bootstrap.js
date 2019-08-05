@@ -23,6 +23,7 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 const JwtToken = `Bearer ${localStorage.getItem('token')}`;
+console.log(JwtToken);
 window.axios.defaults.headers.common['Authorization'] = JwtToken;
 
 /**
@@ -53,6 +54,11 @@ window.Echo = new Echo({
     broadcaster:'pusher',
     key:'c3136137ff382db9c066',
     cluster:'ap3',
-    //encrypted:true,
-    forceTLS: true
+    encrypted:true,
+    //forceTLS: true,
+    auth: {
+        headers: {
+            Authorization: JwtToken,
+        }
+    }
 });

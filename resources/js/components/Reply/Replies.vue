@@ -36,9 +36,11 @@ export default {
                     })
             })
 
-            Echo.private('App.User.' + User.id())
+            console.log(User.id());
+            Echo.private(`App.User.` + User.id())
                 .notification((notification) => {
-                    console.log(notification.type);
+                    //console.log(notification.type);
+                    this.contents.unshift(notification.reply)
                 });
         }
     }

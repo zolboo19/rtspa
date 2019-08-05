@@ -16,11 +16,11 @@ class BroadcastServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        Log::error('Hello');
+        //Log::error('Hello');
 
         Broadcast::routes();
-        //Broadcast::routes(['midleware' => ['auth:api']]);
-        // Broadcast::routes(['midleware' => ['jwt:auth']]);
+        //Broadcast::routes(['middleware' => ['auth:api']]);
+        //Broadcast::routes(['middleware' => ['jwt.auth']]);
 
         require base_path('routes/channels.php');
     }

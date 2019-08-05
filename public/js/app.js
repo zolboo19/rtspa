@@ -2932,8 +2932,10 @@ __webpack_require__.r(__webpack_exports__);
           _this.contents.splice(index, 1);
         });
       });
-      Echo["private"]('App.User.' + User.id()).notification(function (notification) {
-        console.log(notification.type);
+      console.log(User.id());
+      Echo["private"]("App.User." + User.id()).notification(function (notification) {
+        //console.log(notification.type);
+        _this.contents.unshift(notification.reply);
       });
     }
   }
@@ -110812,6 +110814,7 @@ try {
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var JwtToken = "Bearer ".concat(localStorage.getItem('token'));
+console.log(JwtToken);
 window.axios.defaults.headers.common['Authorization'] = JwtToken;
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -110839,8 +110842,13 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: 'c3136137ff382db9c066',
   cluster: 'ap3',
-  //encrypted:true,
-  forceTLS: true
+  encrypted: true,
+  //forceTLS: true,
+  auth: {
+    headers: {
+      Authorization: JwtToken
+    }
+  }
 });
 
 /***/ }),
