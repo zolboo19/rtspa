@@ -16,7 +16,7 @@ export default {
         }
     },
     created(){
-        Echo.channel('likeChannel')
+        Echo.channel('LikeChannel')
             .listen('LikeEvent', (e) => {
                 //console.log(e);
                 if(this.content.id == e.id){

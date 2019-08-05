@@ -24,6 +24,7 @@ class LikeEvent implements ShouldBroadcast
      */
     public function __construct($id, $type)
     {
+        //Log::error('LikeEvent __construct');
 
         $this->id = $id;
         $this->type = $type;
@@ -36,6 +37,9 @@ class LikeEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+
+        //Log::error('LikeEvent broadcastOn');
+
         return new Channel('LikeChannel');
     }
 }

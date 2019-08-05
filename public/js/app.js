@@ -2592,7 +2592,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    Echo.channel('likeChannel').listen('LikeEvent', function (e) {
+    Echo.channel('LikeChannel').listen('LikeEvent', function (e) {
       //console.log(e);
       if (_this.content.id == e.id) {
         e.type == 1 ? _this.count++ : _this.count--;
@@ -110836,9 +110836,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: 'c3136137ff382db9c066',
   cluster: 'ap3',
-  encrypted: true //cluster: 'eu',
-  //forceTLS: true
-
+  //encrypted:true,
+  forceTLS: true
 });
 
 /***/ }),
