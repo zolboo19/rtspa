@@ -2239,7 +2239,7 @@ __webpack_require__.r(__webpack_exports__);
         body: null,
         category_id: null
       },
-      categories: {},
+      categories: [],
       errors: {}
     };
   },
@@ -110770,13 +110770,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AppHome', __webpack_requir
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
-  router: _Router_router_js__WEBPACK_IMPORTED_MODULE_5__["default"],
-  mounted: function mounted() {
-    //шалгаж үзэх зорилгоор оруулсан.
-    Echo.channel('likeChannel').listen('LikeEvent', function (e) {
-      console.log('ooo my god Realtime app');
-    });
-  }
+  router: _Router_router_js__WEBPACK_IMPORTED_MODULE_5__["default"] // mounted(){ //шалгаж үзэх зорилгоор оруулсан.
+  //     Echo.channel('likeChannel')
+  //     .listen('LikeEvent', (e) => {
+  //         console.log('ooo my god Realtime app');
+  //     })
+  // }
+
 });
 
 /***/ }),
@@ -110837,13 +110837,13 @@ if (token) {
 
 
 
-window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js"); //const client = require('pusher-js');
+
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: 'c3136137ff382db9c066',
   cluster: 'ap3',
-  encrypted: true,
-  //forceTLS: true,
+  forceTLS: true,
   auth: {
     headers: {
       Authorization: JwtToken

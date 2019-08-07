@@ -32,7 +32,7 @@ export default {
                 body: null,
                 category_id: null,
             },
-            categories:{},
+            categories:[],
             errors:{}
         }
     },

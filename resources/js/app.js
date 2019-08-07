@@ -56,10 +56,10 @@ Vue.component('AppHome', require('./components/AppHome.vue').default);
 const app = new Vue({
     el: '#app',
     router,
-    mounted(){ //шалгаж үзэх зорилгоор оруулсан.
-        Echo.channel('likeChannel')
-        .listen('LikeEvent', (e) => {
-            console.log('ooo my god Realtime app');
-        })
-    }
+    // mounted(){ //шалгаж үзэх зорилгоор оруулсан.
+    //     Echo.channel('likeChannel')
+    //     .listen('LikeEvent', (e) => {
+    //         console.log('ooo my god Realtime app');
+    //     })
+    // }
 });

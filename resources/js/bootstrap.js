@@ -49,13 +49,13 @@ if (token) {
 import Echo from 'laravel-echo'
 
 window.Pusher = require('pusher-js');
+//const client = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster:'pusher',
     key:'c3136137ff382db9c066',
     cluster:'ap3',
-    encrypted:true,
-    //forceTLS: true,
+    forceTLS: true,
     auth: {
         headers: {
             Authorization: JwtToken,
