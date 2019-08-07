@@ -36,11 +36,21 @@ export default {
                     })
             })
 
-            console.log(User.id());
+            //console.log(User.id());
             Echo.private(`App.User.` + User.id())
                 .notification((notification) => {
-                    //console.log(notification.type);
+                    console.log(notification.type);
                     this.contents.unshift(notification.reply)
+                });
+
+            Echo.channel('deleteReplyChannel')
+                .listen('DeleteReplyEvent', (e) => {
+                    //console.log(e)
+                    for(let index=0; index < this.contents.length; index++){
+                        if(this.contents[index].id == e.id){
+                           this.contents.splice(index, 1) 
+                        }
+                    }
                 });
         }
     }

@@ -1927,33 +1927,41 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    var _this = this;
+
     if (User.loggedIn()) {
       this.getNotifications();
     }
+
+    Echo["private"]("App.User." + User.id()).notification(function (notification) {
+      _this.unread.unshift(notification);
+
+      _this.unreadCount++;
+    });
   },
   methods: {
     getNotifications: function getNotifications() {
-      var _this = this;
+      var _this2 = this;
 
       axios.post('/api/notifications').then(function (res) {
-        _this.read = res.data.readx;
-        _this.unread = res.data.unreadx;
-        _this.unreadCount = res.data.unreadx.length;
+        _this2.read = res.data.readx;
+        _this2.unread = res.data.unreadx;
+        _this2.unreadCount = res.data.unreadx.length;
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
     },
     readIt: function readIt(notification) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post('/api/markAsRead', {
         id: notification.id
       }).then(function (res) {
-        _this2.unread.splice(notification, 1);
+        _this3.unread.splice(notification, 1);
 
-        _this2.read.push(notification);
+        _this3.read.push(notification);
 
-        _this2.unreadCount--;
+        _this3.unreadCount--;
       })["catch"]();
     }
   }
@@ -2931,11 +2939,20 @@ __webpack_require__.r(__webpack_exports__);
         axios["delete"]("/api/question/".concat(_this.question.slug, "/reply/").concat(_this.contents[index].id)).then(function (res) {
           _this.contents.splice(index, 1);
         });
-      });
-      console.log(User.id());
+      }); //console.log(User.id());
+
       Echo["private"]("App.User." + User.id()).notification(function (notification) {
-        //console.log(notification.type);
+        console.log(notification.type);
+
         _this.contents.unshift(notification.reply);
+      });
+      Echo.channel('deleteReplyChannel').listen('DeleteReplyEvent', function (e) {
+        //console.log(e)
+        for (var index = 0; index < _this.contents.length; index++) {
+          if (_this.contents[index].id == e.id) {
+            _this.contents.splice(index, 1);
+          }
+        }
       });
     }
   }
@@ -110813,8 +110830,8 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-var JwtToken = "Bearer ".concat(localStorage.getItem('token'));
-console.log(JwtToken);
+var JwtToken = "Bearer ".concat(localStorage.getItem('token')); //console.log(JwtToken);
+
 window.axios.defaults.headers.common['Authorization'] = JwtToken;
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
