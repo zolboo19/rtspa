@@ -52,13 +52,13 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if($exception instanceOf TokenBlacklistedException){
-            return Response(['error' => 'Токен блоклогдогдсон байна. Тиймээс Асуулт нэмэх боломжгүй.'], Response::HTTP_BAD_REQUEST);
+            return Response(['error' => 'Token can not be used, get new one'], Response::HTTP_BAD_REQUEST);
         } elseif($exception instanceOf TokenInvalidException){
-            return Response(['error' => 'Токен буруу байна. Тиймээс Асуулт нэмэх боломжгүй.'], Response::HTTP_BAD_REQUEST);
+            return Response(['error' => 'Token is invalid.'], Response::HTTP_BAD_REQUEST);
         }elseif ($exception instanceOf TokenExpiredException) {
-            return Response(['error' => 'Токен хугацаа дууссан байна. Тиймээс Асуулт нэмэх боломжгүй.'], Response::HTTP_BAD_REQUEST);
+            return Response(['error' => 'Token is expired.'], Response::HTTP_BAD_REQUEST);
         } elseif ($exception instanceOf JWTException) {
-            return Response(['error' => 'Токен өгөгдөөгүй байна. Тиймээс Асуулт нэмэх боломжгүй.'], Response::HTTP_BAD_REQUEST);
+            return Response(['error' => 'Token is not provided.'], Response::HTTP_BAD_REQUEST);
         }
         return parent::render($request, $exception);
     }
