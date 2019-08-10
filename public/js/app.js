@@ -2461,6 +2461,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2481,6 +2486,11 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.listen();
     this.getQuestion();
+  },
+  computed: {
+    loggedIn: function loggedIn() {
+      return User.loggedIn();
+    }
   },
   methods: {
     listen: function listen() {
@@ -68926,7 +68936,20 @@ var render = function() {
             [
               _c("replies", { attrs: { question: _vm.question } }),
               _vm._v(" "),
-              _c("create-reply", { attrs: { questionSlug: _vm.question.slug } })
+              _vm.loggedIn
+                ? _c("create-reply", {
+                    attrs: { questionSlug: _vm.question.slug }
+                  })
+                : _c(
+                    "div",
+                    { staticClass: "mt-4" },
+                    [
+                      _c("router-link", { attrs: { to: "/login" } }, [
+                        _vm._v("Нэвтрэх")
+                      ])
+                    ],
+                    1
+                  )
             ],
             1
           )
@@ -110588,7 +110611,19 @@ function () {
     key: "decode",
     value: function decode(payload) {
       //console.log(JSON.parse(atob(payload)))
-      return JSON.parse(atob(payload));
+      if (this.isBase64(payload)) {
+        return JSON.parse(atob(payload));
+      }
+    }
+  }, {
+    key: "isBase64",
+    value: function isBase64(str) {
+      //console.log(btoa(atob(str)))
+      try {
+        return btoa(atob(str)).replace(/=/, "") == str;
+      } catch (err) {
+        return false;
+      }
     }
   }]);
 
@@ -110654,7 +110689,7 @@ function () {
       var storedToken = _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getToken();
 
       if (storedToken) {
-        return _Token__WEBPACK_IMPORTED_MODULE_0__["default"].isValid(storedToken) ? true : false;
+        return _Token__WEBPACK_IMPORTED_MODULE_0__["default"].isValid(storedToken) ? true : this.logOut();
       }
 
       return false;
