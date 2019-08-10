@@ -11,7 +11,7 @@
 
         <v-container>
             <replies :question="question"></replies>
-            <create-reply v-if="loggedIn" :questionSlug="question.slug"></create-reply>
+            <create-reply v-if="logIn" :questionSlug="question.slug"></create-reply>
 
             <div class="mt-4" v-else>
                 <router-link to="/login">Нэвтрэх</router-link>
@@ -42,8 +42,8 @@ export default {
         this.getQuestion();
     },
     computed:{
-        loggedIn(){
-            return User.loggedIn();
+        logIn(){
+            return User.loggedIn()
         }
     },
     methods:{

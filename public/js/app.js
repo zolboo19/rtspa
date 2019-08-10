@@ -2488,7 +2488,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getQuestion();
   },
   computed: {
-    loggedIn: function loggedIn() {
+    logIn: function logIn() {
       return User.loggedIn();
     }
   },
@@ -2556,8 +2556,25 @@ __webpack_require__.r(__webpack_exports__);
   props: ['data'],
   data: function data() {
     return {
-      own: User.own(this.data.user_id)
+      own: User.own(this.data.user_id),
+      replyCount: this.data.reply_count
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    EventBus.$on('createReply', function () {
+      _this.replyCount++;
+    });
+    Echo["private"]("App.User." + User.id()).notification(function (notification) {
+      _this.replyCount++;
+    });
+    EventBus.$on('destroyReply', function () {
+      _this.replyCount--;
+    });
+    Echo.channel('deleteReplyChannel').listen('DeleteReplyEvent', function (e) {
+      _this.replyCount--;
+    });
   },
   computed: {
     body: function body() {
@@ -2566,10 +2583,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     destroy: function destroy() {
-      var _this = this;
+      var _this2 = this;
 
       axios["delete"]("/api/question/".concat(this.data.slug)).then(function (res) {
-        return _this.$router.push('/forum');
+        return _this2.$router.push('/forum');
       })["catch"](function (error) {
         return console.log(error.respose.data);
       });
@@ -68936,7 +68953,7 @@ var render = function() {
             [
               _c("replies", { attrs: { question: _vm.question } }),
               _vm._v(" "),
-              _vm.loggedIn
+              _vm.logIn
                 ? _c("create-reply", {
                     attrs: { questionSlug: _vm.question.slug }
                   })
@@ -69012,7 +69029,7 @@ var render = function() {
               _c("v-spacer"),
               _vm._v(" "),
               _c("v-btn", { attrs: { color: "teal" } }, [
-                _vm._v(_vm._s(_vm.data.reply_count) + " - сэтгэгдэл байна.")
+                _vm._v(_vm._s(_vm.replyCount) + " - сэтгэгдэл байна.")
               ])
             ],
             1
